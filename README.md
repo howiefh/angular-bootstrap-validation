@@ -6,6 +6,8 @@ You can either apply success, error or both styles. In case of success state, it
 
 Check the demo: [http://howiefh.github.io/angular-bootstrap-validation/](http://howiefh.github.io/angular-bootstrap-validation/)
 
+or [http://plnkr.co/edit/Tu2mv4SUacuQfJZDJH4s](http://plnkr.co/edit/Tu2mv4SUacuQfJZDJH4s)
+
 #### Instalation
 
 With Bower
