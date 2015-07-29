@@ -8,8 +8,6 @@ Check the demo: [http://howiefh.github.io/angular-bootstrap-validation/](http://
 
 #### Instalation
 
-jQuery 1.6 or newer is required
-
 With Bower
 
     bower install angular-bootstrap-validation
