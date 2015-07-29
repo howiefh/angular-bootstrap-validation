@@ -1,37 +1,73 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
+<html>
+<head>
     <meta charset="UTF-8">
-    <title>Angular-Bootstrap-validation by guilhermegeek</title>
+    <title>Angular-Bootstrap-validation by howiefh</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     
-    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://code.angularjs.org/1.4.0-rc.2/angular.min.js"></script>
-    
-    <script type="text/javascript" src="bower_components/angular-bootstrap-validation/dist/angular-bootstrap-validation.js"></script>
-    <script type="text/javascript">
-      angular
-        .module('test', ['bs-validation']);
-      angular
-        .module('test')
-        .controller('testCtrl', ['$scope', function($scope){
-          
-        }])
-    </script>
-  </head>
-  <body ng-app="test">
+  <script data-require="angular.js@1.x" data-semver="1.4.3" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-messages.js"></script>
+  <script type="text/javascript" src="bower_components/angular-bootstrap-validation/dist/angular-bootstrap-validation.js"></script>
+  <script data-require="ui-bootstrap@*" data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+  <link data-require="bootstrap-css@*" data-semver="3.3.1" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+  <style type="text/css">
+    .ws-form .alert {
+      padding: 6px;
+      margin-bottom: 0px;
+    }
+  </style>
+  <script>
+    angular.module('myApp', ['ngMessages', 'bs-validation'])
+      .controller('TestCtrl', ['$scope', function($scope) {
+        $scope.user = 'fh';
+        $scope.email = 'fh@demo.com';
+        $scope.save = function(){};
+        $scope.errorMessages = [{
+          type: "required",
+          text: "该选项不能为空"
+        }, {
+          type: "maxlength",
+          text: "该选项输入值长度太大"
+        }, {
+          type: "minlength",
+          text: "该选项输入值长度太小"
+        }, {
+          type: "email",
+          text: "输入邮件的格式不正确"
+        }, {
+          type: "pattern",
+          text: "该选项输入格式不正确"
+        }, {
+          type: "url",
+          text: "输入URL格式不正确"
+        }, {
+          type: "max",
+          text: "该选项输入值太大"
+        }, {
+          type: "min",
+          text: "该选项输入值太小"
+        }, {
+          type: "number",
+          text: "必须输入数字"
+        }, {
+          type: "repeat",
+          text: "两次输入不一致"
+        }];
+      }]);
+  </script>
+</head>
+<body ng-app="myApp">
     <div class="container">
       <section class="jumbotron">
       <h1 class="project-name">Angular Bootstrap Validation</h1>
       <p>Directives to apply bootstrap styles to AngularJs form elements</p>
       <div class="row">
       <div class="col-sm-offset-3 col-sm-6">
-      <a href="https://github.com/guilhermegeek/angular-bootstrap-validation" class="btn btn-default col-sm-4">View on GitHub</a>
-      <a href="https://github.com/guilhermegeek/angular-bootstrap-validation/zipball/master" class="btn btn-default col-sm-4">Download .zip</a>
-      <a href="https://github.com/guilhermegeek/angular-bootstrap-validation/tarball/master" class="btn btn-default col-sm-4">Download .tar.gz</a>
+      <a href="https://github.com/howiefh/angular-bootstrap-validation" class="btn btn-default col-sm-4">View on GitHub</a>
+      <a href="https://github.com/howiefh/angular-bootstrap-validation/zipball/master" class="btn btn-default col-sm-4">Download .zip</a>
+      <a href="https://github.com/howiefh/angular-bootstrap-validation/tarball/master" class="btn btn-default col-sm-4">Download .tar.gz</a>
       </div>
       </div>
     </section>
@@ -43,17 +79,46 @@
 <p>Directives to apply bootstrap styles to AngularJs form elements. 
 You can either apply success, error or both styles. In case of success state, it's only applied to dirty forms.</p>
 <div class="row">
-  <form ng-controller="testCtrl" novalidate bs-has name="testForm" class="col-md-6"> <!-- Apply both success and error styles to name and address -->
-    <div class="form-group">
-        <label class="control-label">Name - minlength 3</label>
-        <input type="text" class="form-control" required ng-model="name" ng-minlength="3" />
+  <div ng-controller="TestCtrl">
+    <!-- 提示信息共用集合 -->
+    <script type="text/ng-template" id="email-error-messages">
+      <p ng-message="required">该选项不能为空</p>
+      <p ng-message="minlength">该选项输入值长度不能小于3</p>
+      <p ng-message="maxlength">该选项输入值长度不能大于50</p>
+      <p ng-message="email">输入邮件的格式不正确</p>
+    </script>
+
+
+    <form class="ws-form form-horizontal" name="wsForm" novalidate="">
+      <div class="form-group has-feedback" bs-has>
+        <label class="col-sm-2 control-label" for="email">email *</label>
+        <div class="col-sm-6">
+          <input type="email" class="form-control" name="email" ng-model="email" ng-minlength="3" ng-maxlength="50" required="" />
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        </div>
+        <div class="col-sm-4 alert alert-danger" ng-show="wsForm.email.$invalid  && !wsForm.email.$pristine " ng-messages="wsForm.email.$error">
+          <!--ngMessages 1.4 后 ng-messages-include要在 ng-messages内才行-->
+          <div ng-messages-include="email-error-messages"></div>
+        </div>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{ 'has-error has-feedback' : wsForm.dul_email.$invalid && !wsForm.dul_email.$pristine , 'has-success has-feedback' : wsForm.dul_email.$valid }">
+        <label class="col-sm-2 control-label" for="dul_email">dul_email *</label>
+        <div class="col-sm-6">
+          <input type="email" class="form-control" name="dul_email" ng-model="dul_email" ng-minlength="3" ng-maxlength="50" required="" aria-describedby="inputError2Status" />
+          <span class="glyphicon form-control-feedback" ng-class="{ 'glyphicon-remove' : wsForm.dul_email.$invalid  && !wsForm.dul_email.$pristine , 'glyphicon-ok' : wsForm.dul_email.$valid }" aria-hidden="true"></span>
+          <span id="inputError2Status" class="sr-only">(error)</span>
+        </div>
+        <div class="col-sm-4 alert alert-danger" ng-show="wsForm.dul_email.$invalid  && !wsForm.dul_email.$pristine " ng-messages="wsForm.dul_email.$error">
+          <!--ngMessages 1.4 后 ng-messages-include要在 ng-messages内才行-->
+          <div ng-messages-include="email-error-messages"></div>
+        </div>
+      </div>
+<div class="col-sm-offset-2 col-sm-10">
+      <a class="btn btn-primary" ng-click="wsForm.$valid && save()" ng-class="{disabled : wsForm.$invalid}">保存</a>
     </div>
-    <div class="form-group">
-        <label class="control-label">Address - minlength 5</label>
-        <input type="text" class="form-control" required ng-model="address" ng-minlength="5" />
-    </div>
-    <div ng-if="testForm.$pristine">Type anything in form</div>
-  </form>
+    </form>
+  </div>
 </div>
 <h4>
 <a id="instalation" class="anchor" href="#instalation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instalation</h4>
@@ -122,7 +187,7 @@ You can either apply success, error or both styles. In case of success state, it
 <p>The SO question where they've published the code: <a href="http://stackoverflow.com/questions/17326796/how-to-iterate-through-angular-scope-variables-with-a-loop">here</a></p>
 
       <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/guilhermegeek/angular-bootstrap-validation">Angular-Bootstrap-validation</a> is maintained by <a href="https://github.com/guilhermegeek">guilhermegeek</a>.</span>
+        <span class="site-footer-owner"><a href="https://github.com/howiefh/angular-bootstrap-validation">Angular-Bootstrap-validation</a> is maintained by <a href="https://github.com/howiefh">howiefh</a>.</span>
 
         <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
@@ -131,4 +196,3 @@ You can either apply success, error or both styles. In case of success state, it
     </div> 
   </body>
 </html>
-
