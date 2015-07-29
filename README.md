@@ -6,8 +6,6 @@ You can either apply success, error or both styles. In case of success state, it
 
 #### Instalation
 
-jQuery 1.6 or newer is required
-
 With Bower
 
 	bower install angular-bootstrap-validation
