@@ -4,7 +4,7 @@ Angular Bootstrap Validation
 Directives to apply bootstrap styles to AngularJs form elements. 
 You can either apply success, error or both styles. In case of success state, it's only applied to dirty forms.
 
-Check the demo: [http://guilhermegeek.github.io/angular-bootstrap-validation/](http://guilhermegeek.github.io/angular-bootstrap-validation/)
+Check the demo: [http://howiefh.github.io/angular-bootstrap-validation/](http://howiefh.github.io/angular-bootstrap-validation/)
 
 #### Instalation
 
@@ -12,7 +12,7 @@ jQuery 1.6 or newer is required
 
 With Bower
 
-	bower install angular-bootstrap-validation
+    bower install angular-bootstrap-validation
 
 
 For a manual installation copy the angular-boostrap-validation.js inside dist folder.
@@ -21,7 +21,7 @@ For a manual installation copy the angular-boostrap-validation.js inside dist fo
 
 Include the module bs-validation
 
-	angular.module('app', ['bs-validation']);
+    angular.module('app', ['bs-validation']);
 
 You've three directives:
 
@@ -33,25 +33,25 @@ You've three directives:
 
 ````html
 <form novalidate bs-has> <!-- Apply both success and error styles to name and address -->
-	<div class="form-group">
-		<label class="control-label">Name</label>
-		<input type="text" class="form-control" required ng-model="name" />
-	</div>
-	<div class="form-group">
-		<label class="control-label">Address</label>
-		<input type="text" class="form-control" required ng-model="address" />
-	</div>
+    <div class="form-group">
+        <label class="control-label">Name</label>
+        <input type="text" class="form-control" required ng-model="name" />
+    </div>
+    <div class="form-group">
+        <label class="control-label">Address</label>
+        <input type="text" class="form-control" required ng-model="address" />
+    </div>
 </form>
 
 <form novalidate>
-	<div class="form-group" bs-has-success> <!-- Apply sucess styles to name only -->
-		<label class="control-label">Name</label>
-		<input type="text" class="form-control" required ng-model="name" />
-	</div>
-	<div class="form-group" bs-has> <!-- Apply sucess and error styles to address only -->
-		<label class="control-label">Address</label>
-		<input type="text" class="form-control" required ng-model="address" />
-	</div>
+    <div class="form-group" bs-has-success> <!-- Apply sucess styles to name only -->
+        <label class="control-label">Name</label>
+        <input type="text" class="form-control" required ng-model="name" />
+    </div>
+    <div class="form-group" bs-has> <!-- Apply sucess and error styles to address only -->
+        <label class="control-label">Address</label>
+        <input type="text" class="form-control" required ng-model="address" />
+    </div>
 </form>
 ````
 
